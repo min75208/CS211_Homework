@@ -1,0 +1,67 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+    string outcome;
+    int scores['Z'+1]={};
+    int mem_counts['Z'+1]={};
+    int team=0;
+    double avg['Z'+1]={};
+
+    cout<<"Enter the outcome of the race:";
+    cin>>outcome;
+
+    if(outcome=="done"){
+        return 0;
+    }
+    for( int i=0; i<outcome.length(); i++){
+        scores[outcome[i]]+=(i+1);
+        mem_counts[outcome[i]]++;
+    }
+
+    for(int i='A'; i<'Z'+1; i++){
+        if(scores[i]!=0){
+            team++;
+        }
+    }
+    cout<<"There are "<<team<<" teams."<<endl;
+
+    int runners=outcome.length()/team;
+
+    for(int i='A'; i<'Z'+1; i++){
+        if(mem_counts[i]!=0){
+            if(mem_counts[i]!=runners){
+            cout<<"The teams don't have same number of runners."<<endl;
+            return 0;
+            }
+        }
+    }
+
+    cout<<"Each team has "<< runners << " runners."<<endl;
+
+    for(int i='A'; i<'Z'+1; i++){
+
+        if(scores[i]!=0){
+            avg[i]= (double) scores[i]/runners;
+            cout<< (char) i<<" : "<< avg[i] <<endl;
+        }
+    }
+
+    double highest_score=avg[outcome[0]];
+    char winner=outcome[0];
+
+    for(int i='A'; i<'Z'+1; i++){
+        if(scores[i]!=0){
+            if(avg[i]<highest_score){
+            highest_score=avg[i];
+            winner=(char)i;
+            }
+        }
+    }
+
+    cout<<"The winning team is "<<winner<<" with score "<<highest_score<<"."<<endl;
+
+    return 0;
+
+}
+
