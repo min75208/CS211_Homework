@@ -1,0 +1,14 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+    int s;
+
+    for(int i=0; i<101; i++){
+        s=i*i;
+        if((s%2==1)&&((s/10)%2==1)){
+          cout<<"The first perfect square whose last two digits are both odd is "<<s<<"."<<endl;
+          return 0;
+        }
+    }
+}
