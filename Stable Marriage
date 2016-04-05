@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+
+bool ok(int q[], int c){
+    static int mp[3][3] = { {0,2,1}, 
+                            {0,2,1},  
+                            {1,2,0}}; 
+
+    static int wp[3][3] = { {2,1,0},  
+                            {0,1,2},  
+                            {2,0,1}};
+    
+    for(int i =0; i < c; i++){
+        if( q[c] == q[i])
+            return false;
+    }
+    
+    for(int i = 0; i < c; i++){
+        if( mp[i][q[i]] > mp[i][q[c]] && wp[q[i]][i] > wp[q[i]][c])
+            return false;
+        else if (mp[c][q[c]] > mp[c][q[i]] && wp[q[i]][c] > wp[q[c]][c])
+            return false;
+            
+        else 
+            return true;
+    }
+    return true;
+}
+
+void print(int q[]) {
+   static int solution = 0;
+   cout << "Solution #" << ++solution << ":\nMan\tWoman\n";
+   for (int i = 0; i < 3; ++i)
+      cout << i << "\t" << q[i] << "\n";
+   cout << "\n";
+}
+
+int main(){
+    int q[3], c = 0;
+    q[2] =0;
+
+    while (c>=0){
+        c++;
+        if(c==3){
+            print(q);
+            c--;
+            if(c==-1) return 0;
+        }
+        else
+            q[c]=-1;
+    
+        while(c>=0){
+            q[c]++;
+            if(q[c]==3){
+                c--;
+                if(c==-1) return 0;
+            }
+            else if(ok(q,c)) break;
+        }
+    }
+}
+    
+    
